@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::post('login', [LoginController::class, 'store'])->name('login.store');
 
 Route::redirect('user', 'user/settings');
 Route::get('user/settings', [SettingsController::class, 'index'])->name('user.settings');
+
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
 
 

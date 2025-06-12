@@ -84,7 +84,7 @@
                                     alt="">
                                 <span class="hidden lg:flex lg:items-center">
                                     <span class="ml-4 text-sm font-semibold leading-6 text-gray-900"
-                                        aria-hidden="true">Tom Cook</span>
+                                        aria-hidden="true">{{ Auth::user()->first_name }}</span>
                                     <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                         aria-hidden="true">
                                         <path fill-rule="evenodd"
@@ -110,8 +110,12 @@
                                 <!-- Active: "bg-gray-50", Not Active: "" -->
                                 <a href="{{ route('user.settings') }}" class="block px-3 py-1 text-sm leading-6 text-gray-900"
                                     role="menuitem" tabindex="-1" id="user-menu-item-0">{{ __('Настройки') }}</a>
-                                <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-1">{{ __('Выход') }}</a>
+                                {{-- <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" --}}
+                                    {{-- role="menuitem" tabindex="-1" id="user-menu-item-1"> --}}
+                                    <x-form method="POST" action="{{ route('logout') }}" >
+                                        <button type="submit" class="block px-3 py-1 text-sm leading-6 text-gray-900">{{ __('Выход') }}</button>
+                                    </x-form>
+                                {{-- </a> --}}
                             </div>
                         </div>
                     </div>
