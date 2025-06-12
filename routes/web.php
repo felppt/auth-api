@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\user\SettingsController;
 
 Route::redirect('/', '/registration');
 
@@ -19,6 +20,9 @@ Route::get('/login', function() {
 })->name('login');
 
 Route::post('login', [LoginController::class, 'store'])->name('login.store');
+
+Route::redirect('user', 'user/settings');
+Route::get('user/settings', [SettingsController::class, 'index'])->name('user.settings');
 
 
 
