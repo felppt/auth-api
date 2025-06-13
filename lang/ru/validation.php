@@ -222,6 +222,7 @@ return [
         'month'                    => 'месяц',
         'name'                     => 'имя',
         'national_code'            => 'национальный код',
+        'new_password'             => 'новый пароль',
         'number'                   => 'номер',
         'password'                 => 'пароль',
         'password_confirmation'    => 'подтверждение пароля',

@@ -54,6 +54,7 @@ class User extends Authenticatable
         'password',
         'online_at',
         'gender',
+        'password_changed_at',
     ];
 
     protected $hidden = [
@@ -66,6 +67,7 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
             'online_at' => 'datetime', // Carbon
+            'password_changed_at' => 'datetime', // Carbon
             'gender' => GenderEnum::class, // Carbon
         ];
     }
@@ -77,5 +79,12 @@ class User extends Authenticatable
             $this->second_name,
             $this->last_name,
         ]));
+    }
+    public function updatePassword(string $password): bool
+    {
+        return $this->update([
+            'password' => $password,
+            'password_changed_at' => now(),
+        ]);
     }
 }
