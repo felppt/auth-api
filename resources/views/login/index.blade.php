@@ -21,7 +21,7 @@
                         <x-form.label for="email">
                             {{ __('Ваш email') }}
                         </x-form.label>
-                        <x-form.text type="email" name="email" placeholder="mail@email.com" autocomplete="email"
+                        <x-form.text type="email" name="email" value="{{ old('email') }} placeholder="mail@email.com" autocomplete="email"
                             required />
                     </x-form.item>
                     <x-form.item>
@@ -49,7 +49,7 @@
 
     <x-slot:crossLink>
         {{ __('Нет аккаунта?') }}
-        <x-link to="{{ route('registration') }}">{{ __('Зарегистрироваться') }}</x-link>
+        <x-link href="{{ route('registration') }}">{{ __('Зарегистрироваться') }}</x-link>
     </x-slot:crossLink>
 
 </x-layouts.auth>

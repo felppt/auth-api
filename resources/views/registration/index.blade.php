@@ -11,14 +11,14 @@
                         <x-form.label for="first_name">
                             Ваше Имя
                         </x-form.label>
-                        <x-form.text type="text" name="first_name" placeholder="Катенак Мишуля" autofocus required />
+                        <x-form.text type="text" name="first_name" value="{{ old('first_name') }}"  placeholder="Катенак Мишуля" autofocus required />
 
                     </x-form.item>
                     <x-form.item>
                         <x-form.label for="email">
                             Ваш email
                         </x-form.label>
-                        <x-form.text type="email" name="email" placeholder="mail@email.com" autocomplete="email" required />
+                        <x-form.text type="email" name="email" value="{{ old('email') }}" placeholder="mail@email.com" autocomplete="email" required />
                     </x-form.item>
                     <x-form.item>
                         <x-form.label for="password">
@@ -56,7 +56,7 @@
 
     <x-slot:crossLink>
         {{ __('Уже зарегистрированы?') }}
-        <x-link to="{{ route('login')}}">{{ __('Войти в аккаунт') }}</x-link>
+        <x-link href="{{ route('login')}}">{{ __('Войти в аккаунт') }}</x-link>
     </x-slot:crossLink>
-    
+
 </x-layouts.auth>

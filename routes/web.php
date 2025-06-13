@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
-use App\Http\Controllers\user\SettingsController;
+use App\Http\Controllers\User\SettingsController;
 
 
 Route::redirect('/', '/registration');
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'online'])->group(function() {
 
     Route::redirect('user', 'user/settings');
     Route::get('user/settings', [SettingsController::class, 'index'])->name('user.settings');
+    Route::get('user/settings/profile', [ProfileController::class, 'edit'])->name('user.settings.profile.edit');
+    Route::post('user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update');
 
     Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
