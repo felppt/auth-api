@@ -10,9 +10,11 @@ class SettingsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('user.settings.index');
+        $user = $request->user();
+
+        return view('user.settings.index', compact('user'));
     }
 
     /**

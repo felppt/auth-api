@@ -2,35 +2,44 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\user\SettingsController;
 
+
 Route::redirect('/', '/registration');
 
-Route::get('/registration', function() {
-    return view('registration.index');
-})->name('registration');
 
-Route::post('registration', [RegisterController::class, 'store'])->name('registration.store');
+Route::middleware('guest')->group(function() {
+    Route::get('/registration', function () {
+        return view('registration.index');
+    })->name('registration');
 
-Route::get('/login', function() {
-    return view('login.index');
-})->name('login');
+    Route::post('registration', [RegisterController::class, 'store'])->name('registration.store');
 
-Route::post('login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/login', function () {
+        return view('login.index');
+    })->name('login');
 
-Route::redirect('user', 'user/settings');
-Route::get('user/settings', [SettingsController::class, 'index'])->name('user.settings');
-
-Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::post('login', [LoginController::class, 'store'])->name('login.store');
+});
 
 
+Route::middleware(['auth', 'online'])->group(function() {
+    Route::get('/tasks', [TasksController::class, 'index'])->name('tasks');
 
 
-Route::get('/tasks', [TasksController::class, 'index'])->name('tasks');
+    Route::redirect('user', 'user/settings');
+    Route::get('user/settings', [SettingsController::class, 'index'])->name('user.settings');
+
+    Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+    Route::get('/test', function() {
+        return 'Test';
+    });
+});
+
 
 Route::get('/logs', function() {
     return view('logs.index');
@@ -40,17 +49,6 @@ Route::get('/orders', function() {
     return view('orders.index');
 })->name('orders');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-// Route::middleware('auth')->get('health', \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
 
 Route::get('/tasks/category', [TasksController::class, 'getCategoryTasks'])->name('tasks.category');
 Route::post('/tasks/set-complete', [TasksController::class, 'setComplete'])->name('tasks.setcomplete');

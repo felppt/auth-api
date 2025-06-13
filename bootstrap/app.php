@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\OnlineMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectUsersTo('/user/settings');
+        $middleware->redirectGuestsTo('/login');
+        $middleware->alias([
+            'online' => OnlineMiddleware::class
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

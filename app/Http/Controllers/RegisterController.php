@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
         User::query()->create($data);
 
-        return redirect()->to('registration');
+        return redirect()->intended('/registration');
     }
 
 }

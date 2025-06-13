@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\GenderEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -50,6 +52,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'online_at',
+        'gender',
     ];
 
     protected $hidden = [
@@ -61,6 +65,17 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'online_at' => 'datetime', // Carbon
+            'gender' => GenderEnum::class, // Carbon
         ];
+    }
+
+    public function getFullName(): string
+    {
+        return implode(" ", array_filter([
+            $this->first_name,
+            $this->second_name,
+            $this->last_name,
+        ]));
     }
 }
